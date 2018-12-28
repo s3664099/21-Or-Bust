@@ -48,6 +48,10 @@ public class AddPlayerPopUp extends JFrame {
 		// Adds a lister to execute the appropriate method when the button is pressed
 		JButton submit = new JButton("Submit");
 		submit.addActionListener(new NewPlayerSubmit(this, gameEngine, frame));
+		
+		//Sets the submit button as the default button so that
+		//it activates when the 'enter' key is pressed
+		this.getRootPane().setDefaultButton(submit);
 
 		// Set up frame
 		add(nameLabel);

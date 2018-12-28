@@ -72,7 +72,7 @@ public class GameMenubar extends JMenuBar {
 		// Game Menu Options
 		newGame.addActionListener(new NewGame(frame));
 		saveGame.addActionListener(new SaveGame(gameEngine));
-		loadGame.addActionListener(new LoadGame(gameEngine));
+		loadGame.addActionListener(new LoadGame(gameEngine, frame));
 		quitGame.addActionListener(new QuitGameEvent());
 
 		// Adds menu to menu bar

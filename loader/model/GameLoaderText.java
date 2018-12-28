@@ -14,50 +14,70 @@ import model.interfaces.Player;
 
 public class GameLoaderText implements GameLoader {
 	
+	//Method for loading data stored in a text file
 	@Override
 	public Collection<Player> loadAllPlayers(String path) throws GameLoaderException {
 
+		//creates a collection of players
 		Collection<Player> players = new ArrayList<Player>();
 				
-		try(Scanner input = new Scanner(new File(path)).useDelimiter("\t")) {
+		//Begins to load the file
+		try(Scanner input = new Scanner(new File(path))) {
 			
-			while(input.hasNextLine())
+			//makes a note that a tab space is the delimiter between data
+			input.useDelimiter("\t");
+			
+			while(input.hasNext())
 			{
 				
+				//Loads and stores the data
 				String id = input.next();
-				System.out.println("ID:"+id);
-				String name = input.next();
-				System.out.println("Name:"+name);
-				int points = input.nextInt();
-				System.out.println("Points:"+points);
+								
+				//Checks to see if the word 'stop' has been loaded
+				if (id.contains("stop"))
+				{
+					//Breaks out of the method if that is the case
+					return players;
+				}
 				
+				String name = input.next();
+				int points = input.nextInt();
+				
+				//Creates a new player from the data
 				Player player = new SimplePlayer(id, name, points);
 				
-				System.out.println(player.toString());
-				
-				players.add(player);
-								
+				//Places the new player into the collection
+				players.add(player);				
 			}
-			
+						
+			//Returns the collection of players to place them into the game
 			return players;
 			
 		} catch (Exception e) {
+			
+			//Throws an exception is there is a problem loading the file
 			throw new GameLoaderException("Unable to load file "+path);
 		}
 				
 
 	}
 
+	//Method to save the current status of all the playes
 	@Override
 	public void saveAllPlayers(String path, Collection<Player> players) throws GameLoaderException
 	{
+		//Opens a new file
 		try (PrintWriter pw = new PrintWriter(new FileWriter(path)))
 		{
+			//cycles through each of the players and saves the player data
 			for (Player player:players)
 			{
-				pw.println(""+player.getPlayerId()+"\t"+player.getPlayerName()+"\t"
+				pw.println(player.getPlayerId()+"\t"+player.getPlayerName()+"\t"
 						+player.getPoints()+"\t");
 			}
+			
+			//Flag inserted into the file to indicate that there is nothing more to load
+			pw.print("stop");
 						
 		} catch (IOException e) {
 			throw new GameLoaderException("Unable to create file");
@@ -67,7 +87,7 @@ public class GameLoaderText implements GameLoader {
 
 	@Override
 	public void appendPlayer(String path, Player player) throws GameLoaderException {
-		// TODO Auto-generated method stub
+		// TODO create an append player method where a save file already exists
 		
 	}
 

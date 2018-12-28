@@ -10,7 +10,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import controller.SwitchPlayerEvent;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 

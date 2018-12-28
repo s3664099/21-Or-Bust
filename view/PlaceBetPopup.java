@@ -30,8 +30,13 @@ public class PlaceBetPopup extends JFrame {
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
+		//Creates the submit button
 		JButton submit = new JButton("Place Bet");
 		submit.addActionListener(new NewPlaceBet(frame, this));
+		
+		//Sets the submit button as the default button
+		//So that when the 'enter' key is pressed it also activates
+		this.getRootPane().setDefaultButton(submit);
 
 		add(nameLabel);
 		add(bet);
